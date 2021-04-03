@@ -3,7 +3,7 @@ library(survivoR)
 library(extrafont)
 library(gggibbous)
 loadfonts(quiet = TRUE)
-font_import()
+
 
 df <- castaways %>% 
   filter(str_detect(result, "evac")) %>% 
@@ -12,24 +12,9 @@ df <- castaways %>%
     season_name = ifelse(str_detect(season_name, "K"), "Survivor: Koah Rong", season_name)
     )
 
-df %>% 
-  ggplot() +
-  geom_bar(data = df, mapping = aes(x = full_name, y = 39), stat = "identity", colour = "grey50", fill = NA, alpha = 0.4) +
-  geom_bar(data = df, mapping = aes(x = full_name, y = day), stat = "identity", fill = "#6d6875", alpha = 1) +
-  # geom_text(data = df, mapping = aes(x = full_name, y = pmax(5, day) + 1, label = day)) +
-  geom_text(data = df, mapping = aes(x = full_name, y = 1, label = paste(full_name, "\n", season_name)), fontface = "italic", hjust = 0) +
-  theme_void() +
-  theme(
-    plot.background = element_rect(fill = "#ffe8d6")
-  ) +
-  # coord_polar("y") +
-  coord_flip() +
-  ggsave("day1.png", height = 14, width = 7)
-
-sb <- "The tale of the 15 castaways that had their Survivor journey cut short by injury and being 
-medically evacuated from the island. Only a few make it the full 39 days. Most are voted out. These
-souls were denied even of that" %>% 
-  str_wrap(40)
+sb <- str_wrap("The tale of the 15 castaways that had their Survivor journey cut short by injury and being 
+medically evacuated off the island. Only a few make it the full 39 days. Most are voted out. These
+souls were denied even of that", 40)
 
 df %>% 
   ggplot() +
