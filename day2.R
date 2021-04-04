@@ -2,6 +2,7 @@ library(tidyverse)
 library(survivoR)
 library(extrafont)
 library(ggimage)
+library(lubridate)
 loadfonts(quiet = TRUE)
 
 start <- now()
@@ -36,6 +37,7 @@ bone_head <- im_df %>%
 
 a <- 10
 bg <- rgb(230 + a, 190 + a, 142 + a, maxColorValue = 255)
+# bg <- "grey40"
 im_df %>% 
   ggplot(aes(x, -y/2, image = image)) +
   # geom_segment(data = bone_head, mapping = aes(x = x, xend = xend, y = -y/2, yend = -yend/2), linetype = 2) +
